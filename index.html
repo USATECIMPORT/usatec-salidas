@@ -212,8 +212,17 @@ button{border-radius:8px;padding:13px 18px;font-size:14px;font-weight:800;cursor
       </div>
       <div class="block-body">
         <div class="grid">
-          <div class="span5"><label>ACCESORIOS II</label><input id="accesorios2"></div>
-          <div class="span3"><label>POS / FACTURA II</label><input id="posFactura2" type="number" step="0.01"></div>
+          <div class="span5"><label>ADICIONALES</label>
+      <select id="accesorios2">
+        <option value="">Seleccionar adicional</option>
+        <option value="PACK ACCESORIOS">PACK ACCESORIOS</option>
+        <option value="TARJETERO">TARJETERO</option>
+        <option value="CASE">CASE</option>
+        <option value="CARGADOR">CARGADOR</option>
+      </select>
+    </div>
+          <div class="span2"><label>PAGOS POS</label><input id="posFactura2" type="number" step="0.01"></div>
+    <div class="span2"><label>REF</label><input id="refPos" placeholder="Referencia"></div>
           <div class="span2"><label>DELIVERY II</label><input id="delivery2" type="number" step="0.01"></div>
           <div class="span2"><label>S/ II</label><input id="montoAccesorios2" type="number" step="0.01"></div>
         </div>
@@ -231,7 +240,14 @@ button{border-radius:8px;padding:13px 18px;font-size:14px;font-weight:800;cursor
             <div class="span5"><label>VENDEDOR</label><input id="vendedor"></div>
           </div>
           <div class="grid">
-            <div class="span5"><label>TRANSFERENCIA</label><input id="transferencia"></div>
+            <div class="span5"><label>TRANSFERENCIA</label>
+      <select id="transferencia">
+        <option value="">Seleccionar banco</option>
+        <option value="BCP">BCP</option>
+        <option value="BBVA">BBVA</option>
+        <option value="SCOTIABANK">SCOTIABANK</option>
+      </select>
+    </div>
             <div class="span7"><label>MONTO TRANSFERIDO</label><input id="montoTransferido" type="number" step="0.01"></div>
             <div class="span5"><label>YAPE / PLIN</label><input id="yapePlin" type="number" step="0.01"></div>
             <div class="span7"><label>NRO OP</label><input id="nroOp"></div>
@@ -244,11 +260,11 @@ button{border-radius:8px;padding:13px 18px;font-size:14px;font-weight:800;cursor
     <!-- TOTALES -->
     <div class="summary">
       <div class="total-card">
-        <b>TOTAL A COBRAR (J32)</b>
+        <b>TOTAL A COBRAR</b>
         <span id="totalCobrado">S/ 0.00</span>
       </div>
       <div class="total-card red">
-        <b>UTILIDAD (J41)</b>
+        <b>UTILIDAD</b>
         <span id="utilidad">S/ 0.00</span>
       </div>
     </div>
@@ -270,7 +286,7 @@ const STORAGE_KEY = "usatec_salidas_v3";
 const ids = [
   "fecha","tipoSalida","grupo","linea","modelo","modeloManual","color","sublineaColor","capacidad","costo","ventaEquipo",
   "cliente","dni","celular","accesorios","montoAccesorios","delivery","posFactura",
-  "imei","proveedor","accesorios2","posFactura2","delivery2","montoAccesorios2",
+  "imei","proveedor","accesorios2","posFactura2","refPos","delivery2","montoAccesorios2",
   "efectivo","posZipago","vendedor","transferencia","montoTransferido","yapePlin","nroOp","validador"
 ];
 
@@ -549,7 +565,55 @@ function guardarLocal(registro){
 }
 
 async function enviarABBDD(registro){
-  // Aquí conectaremos la BBDD online cuando la definas.
+  const API_URL = "https://script.google.com/macros/s/AKfycbwaV5fLoxFVY_kVNBgHuQMVmWNpiyuMOTGDJSreKNxFfirW-2STDihi0PgkQXMnfwG2/exec";
+
+  if (!API_URL || API_URL.includes("PEGA_AQUI")) {
+    throw new Error("Falta configurar la URL de Google Sheets.");
+  }
+
+  const payload = {
+    fecha: registro.fecha || "",
+    movimiento: "SALIDA",
+    tipoSalida: registro.tipoSalida || "",
+    grupo: registro.grupo || "",
+    linea: registro.linea || "",
+    sublineaColor: registro.sublineaColor || registro.color || "",
+    capacidad: registro.capacidad || "",
+    costo: registro.costo || "",
+    ventaEquipo: registro.ventaEquipo || "",
+    imei: registro.imei || "",
+    accesorios: registro.accesorios || "",
+    montoAccesorios: registro.montoAccesorios || "",
+    delivery: registro.delivery || "",
+    posFactura: registro.posFactura || "",
+    proveedor: registro.proveedor || "",
+    cliente: registro.cliente || "",
+    dni: registro.dni || "",
+    celular: registro.celular || "",
+    accesorios2: registro.accesorios2 || "",
+    montoAccesorios2: registro.montoAccesorios2 || "",
+    posFactura2: registro.posFactura2 || "",
+    refPos: registro.refPos || "",
+    delivery2: registro.delivery2 || "",
+    efectivo: registro.efectivo || "",
+    transferencia: registro.transferencia || "",
+    montoTransferido: registro.montoTransferido || "",
+    posZipago: registro.posZipago || "",
+    yapePlin: registro.yapePlin || "",
+    nroOp: registro.nroOp || "",
+    vendedor: registro.vendedor || "",
+    utilidad: registro.utilidad || "",
+    totalCobrado: registro.totalCobrado || "",
+    validador: registro.validador || ""
+  };
+
+  await fetch(API_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {"Content-Type": "text/plain;charset=utf-8"},
+    body: JSON.stringify(payload)
+  });
+
   return true;
 }
 
