@@ -62,34 +62,151 @@ button{border-radius:8px;padding:13px 18px;font-size:14px;font-weight:800;cursor
  .span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8{grid-column:span 12}
  .summary{grid-template-columns:1fr}
 }
-@media print{
-  @page{size:A4 portrait;margin:4mm}
-  html,body{margin:0!important;padding:0!important;width:210mm;height:297mm;background:#fff!important}
-  body{overflow:visible!important}
-  .actions,.status,.scan-btn,.scanner-box{display:none!important}
-  .wrap{width:202mm!important;max-width:202mm!important;margin:0 auto!important;padding:0!important;zoom:.50}
-  .header{grid-template-columns:220px 1fr 180px!important;gap:8px!important;margin-bottom:5px!important}
-  .logo{width:185px!important;height:55px!important}
-  .title h1{font-size:23px!important}
-  .title div{margin-top:2px!important;font-size:10px!important;letter-spacing:3px!important}
-  .datebox{padding:6px 8px!important;border-radius:6px!important}
-  .datebox label{font-size:8px!important;margin-bottom:2px!important}
-  .datebox input{font-size:12px!important}
-  .block{margin-bottom:4px!important;border-radius:6px!important;break-inside:avoid!important;page-break-inside:avoid!important}
-  .block-title{padding:4px 7px!important;font-size:11px!important;gap:6px!important}
-  .block-title .hint{font-size:7px!important}
-  .block-body{padding:5px!important}
-  .grid{gap:4px!important}
-  .two-col{gap:5px!important}
-  label{font-size:7px!important;margin-bottom:1px!important}
-  input,select,textarea{padding:4px 5px!important;height:23px!important;min-height:0!important;font-size:8px!important;border-radius:3px!important}
-  textarea{height:26px!important}
-  .imei-row{gap:3px!important}
-  .summary{gap:5px!important;margin-top:4px!important;break-inside:avoid!important;page-break-inside:avoid!important}
-  .total-card{padding:6px 8px!important;border-radius:6px!important;break-inside:avoid!important;page-break-inside:avoid!important}
-  .total-card b{font-size:8px!important;margin-bottom:1px!important}
-  .total-card span{font-size:16px!important}
-  form,section,header,.summary{page-break-before:avoid!important;page-break-after:avoid!important}
+
+@media print {
+
+  @page {
+    size: A4 portrait;
+    margin: 4mm;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  .actions,
+  .status,
+  .scan-btn,
+  .scanner-box {
+    display: none !important;
+  }
+
+  .wrap {
+    width: 200mm !important;
+    max-width: 200mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    transform: scale(0.48);
+    transform-origin: top left;
+    width: 208% !important;
+  }
+
+  .header {
+    gap: 5px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .logo {
+    width: 160px !important;
+    height: 48px !important;
+  }
+
+  .title h1 {
+    font-size: 20px !important;
+  }
+
+  .title div {
+    font-size: 9px !important;
+    margin-top: 1px !important;
+    letter-spacing: 2px !important;
+  }
+
+  .datebox {
+    padding: 5px 7px !important;
+  }
+
+  .datebox label {
+    font-size: 7px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .datebox input {
+    font-size: 10px !important;
+  }
+
+  .block {
+    margin-bottom: 3px !important;
+    border-radius: 5px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .block-title {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+  }
+
+  .block-title .hint {
+    font-size: 7px !important;
+  }
+
+  .block-body {
+    padding: 4px !important;
+  }
+
+  .grid {
+    gap: 3px !important;
+  }
+
+  .two-col {
+    gap: 4px !important;
+  }
+
+  label {
+    font-size: 7px !important;
+    margin-bottom: 1px !important;
+  }
+
+  input,
+  select,
+  textarea {
+    height: 21px !important;
+    min-height: 21px !important;
+    padding: 2px 4px !important;
+    font-size: 8px !important;
+    border-radius: 3px !important;
+  }
+
+  .imei-row {
+    gap: 3px !important;
+  }
+
+  .summary {
+    margin-top: 3px !important;
+    gap: 4px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .total-card {
+    padding: 5px 7px !important;
+    border-radius: 5px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .total-card b {
+    font-size: 8px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .total-card span {
+    font-size: 15px !important;
+  }
+
+  form,
+  section,
+  header,
+  .summary {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
 }
 </style>
 </head>
@@ -591,10 +708,6 @@ function guardarLocal(registro){
 async function enviarABBDD(registro){
   const API_URL = "https://script.google.com/macros/s/AKfycbwaV5fLoxFVY_kVNBgHuQMVmWNpiyuMOTGDJSreKNxFfirW-2STDihi0PgkQXMnfwG2/exec";
 
-  if (!API_URL || API_URL.includes("PEGA_AQUI")) {
-    throw new Error("Falta configurar la URL de Google Sheets.");
-  }
-
   const payload = {
     fecha: registro.fecha || "",
     movimiento: "SALIDA",
@@ -631,11 +744,16 @@ async function enviarABBDD(registro){
     validador: registro.validador || ""
   };
 
+  const body = new URLSearchParams();
+  Object.entries(payload).forEach(([k,v]) => body.append(k, v));
+
   await fetch(API_URL, {
     method: "POST",
     mode: "no-cors",
-    headers: {"Content-Type": "text/plain;charset=utf-8"},
-    body: JSON.stringify(payload)
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+    },
+    body: body.toString()
   });
 
   return true;
@@ -682,7 +800,7 @@ $("salidaForm").addEventListener("submit", async e => {
   try {
     guardarLocal(registro);
     await enviarABBDD(registro);
-    estado("Salida guardada. Preparando impresión...", true);
+    estado("Salida enviada a BBDD. Preparando impresión...", true);
     setTimeout(() => {
       window.print();
       limpiar();
