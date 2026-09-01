@@ -63,9 +63,33 @@ button{border-radius:8px;padding:13px 18px;font-size:14px;font-weight:800;cursor
  .summary{grid-template-columns:1fr}
 }
 @media print{
- .actions,.status{display:none!important}
- .wrap{max-width:none;padding:0}
- .block,.total-card{break-inside:avoid}
+  @page{size:A4 portrait;margin:4mm}
+  html,body{margin:0!important;padding:0!important;width:210mm;height:297mm;background:#fff!important}
+  body{overflow:visible!important}
+  .actions,.status,.scan-btn,.scanner-box{display:none!important}
+  .wrap{width:202mm!important;max-width:202mm!important;margin:0 auto!important;padding:0!important;zoom:.50}
+  .header{grid-template-columns:220px 1fr 180px!important;gap:8px!important;margin-bottom:5px!important}
+  .logo{width:185px!important;height:55px!important}
+  .title h1{font-size:23px!important}
+  .title div{margin-top:2px!important;font-size:10px!important;letter-spacing:3px!important}
+  .datebox{padding:6px 8px!important;border-radius:6px!important}
+  .datebox label{font-size:8px!important;margin-bottom:2px!important}
+  .datebox input{font-size:12px!important}
+  .block{margin-bottom:4px!important;border-radius:6px!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  .block-title{padding:4px 7px!important;font-size:11px!important;gap:6px!important}
+  .block-title .hint{font-size:7px!important}
+  .block-body{padding:5px!important}
+  .grid{gap:4px!important}
+  .two-col{gap:5px!important}
+  label{font-size:7px!important;margin-bottom:1px!important}
+  input,select,textarea{padding:4px 5px!important;height:23px!important;min-height:0!important;font-size:8px!important;border-radius:3px!important}
+  textarea{height:26px!important}
+  .imei-row{gap:3px!important}
+  .summary{gap:5px!important;margin-top:4px!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  .total-card{padding:6px 8px!important;border-radius:6px!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  .total-card b{font-size:8px!important;margin-bottom:1px!important}
+  .total-card span{font-size:16px!important}
+  form,section,header,.summary{page-break-before:avoid!important;page-break-after:avoid!important}
 }
 </style>
 </head>
